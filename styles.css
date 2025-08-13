@@ -1,0 +1,85 @@
+#calc-yin {
+  background-color: #f9f9f9;
+  color: #000000;
+  border: none;
+  padding: 0.8em 1.4em;
+  border-radius: 24px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+#calc-yin:hover,
+#calc-yin:focus {
+  background-color: #000000;
+  color: #f9f9f9;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+  outline: none;
+}
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(193, 48, 209, 0.16) 0%,
+    rgba(199, 87, 154, 1) 49%,
+    rgba(237, 221, 83, 1) 100%
+  );
+}
+/* Global CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header h1 {
+  font-family: "Satisfy", cursive;
+  font-size: 60px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+main p {
+  padding: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#total-length {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+input[type="number"],
+textarea {
+  border: 1px solid #f9f9f9;
+  border-radius: 6px;
+  padding: 8px;
+  background-color: #f9f9f9;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  margin: 0.3rem;
+}

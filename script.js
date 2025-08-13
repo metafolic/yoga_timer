@@ -1,3 +1,5 @@
+let sum = 0; // Define sum in the global scope
+
 function getInputValues() {
   return {
     poses: document.getElementById("posesInput").value,
@@ -23,12 +25,30 @@ function isNonNegativeNumber(value) {
 }
 
 function calculateYinLength() {
+  document.getElementById("errorMessage").textContent = ""; // Clear error message
   const { poses, lengthBetween, lengthHold } = getInputValues();
   // Use poses, lengthBetween, lengthHold for your calculation
+
+  // Validate inputs
+  if (
+    !isNonNegativeWholeNumber(poses) ||
+    !isNonNegativeNumber(lengthBetween) ||
+    !isNonNegativeNumber(lengthHold)
+  ) {
+    document.getElementById("errorMessage").textContent =
+      "Please enter valid, positive numbers for all fields. Poses must be a whole number.";
+    document.getElementById("totalLengthOutput").textContent = 0;
+    sum = 0;
+    return;
+  }
   const posesNum = Number(poses);
   const lengthBetweenNum = Number(lengthBetween);
   const lengthHoldNum = Number(lengthHold);
-  const sum = (lengthBetweenNum + lengthHoldNum) * posesNum;
+  sum = (lengthBetweenNum + lengthHoldNum) * posesNum;
   // Update the output span
   document.getElementById("totalLengthOutput").textContent = sum;
+}
+
+function calculateTime() {
+  let seconds = sum * 60;
 }

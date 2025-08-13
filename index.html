@@ -6,36 +6,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Yoga Timer</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header>
-      <h1>Yoga Timer</h1>
-    </header>
-    <main>
-      <p id="poses">
-        Number of Yin Poses:
-        <input id="posesInput" type="number" value="5" min="1" max="100" />
-      </p>
-      <p id="length-between">
-        Time Between Poses (minutes):
-        <input id="lengthBetweenInput" type="number" value="1" />
-      </p>
-      <p id="length-hold">
-        Yin Pose Hold Length (minutes):
-        <input id="lengthHoldInput" type="number" value="3" />
-      </p>
-      <p id="total-length">
-        Total Yin Practice Length (minutes):
-        <span id="totalLengthOutput">0</span>
-      </p>
-      <p>
-        <button onclick="calculateYinLength()">Calculate Total Length</button>
-      </p>
-      <p id="errorMessage" style="color: red"></p>
-    </main>
-    <footer>
-      <p>&copy; 2025 Yoga Timer</p>
-    </footer>
-    <script src="script.js"></script>
+    <div class="container">
+      <header>
+        <h1>Yoga Timer</h1>
+      </header>
+      <main>
+        <p id="poses">
+          <label for="posesInput">Number of Yin Poses:</label>
+          <input id="posesInput" type="number" value="5" min="1" max="100" />
+        </p>
+        <p id="length-between">
+          <label for="lengthBetweenInput">Time Between Poses (minutes):</label>
+          <input
+            id="lengthBetweenInput"
+            type="number"
+            value="1"
+            min="0.01"
+            step="any"
+          />
+        </p>
+        <p id="length-hold">
+          <label for="lengthHoldInput">Yin Pose Hold Length (minutes):</label>
+          <input
+            id="lengthHoldInput"
+            type="number"
+            value="3"
+            min="0.01"
+            step="any"
+          />
+        </p>
+        <p>
+          <button id="calc-yin" onclick="calculateYinLength()">
+            Calculate Total Length
+          </button>
+        </p>
+        <p id="total-length">
+          Total Yin Practice Length (minutes):
+          <span id="totalLengthOutput">0</span>
+        </p>
+        <p id="errorMessage"></p>
+      </main>
+      <footer>
+        <p>&copy; 2025 Yoga Timer</p>
+      </footer>
+      <script src="script.js"></script>
+    </div>
   </body>
 </html>
