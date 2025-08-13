@@ -13,18 +13,25 @@
     </header>
     <main>
       <p id="poses">
-        Number of Yin Poses: <input type="number" value="5" min="1" max="100" />
+        Number of Yin Poses:
+        <input id="posesInput" type="number" value="5" min="1" max="100" />
       </p>
       <p id="length-between">
-        Time Between Poses (minutes): <input type="number" value="1" />
+        Time Between Poses (minutes):
+        <input id="lengthBetweenInput" type="number" value="1" />
       </p>
       <p id="length-hold">
-        Yin Pose Hold Length (minutes): <input type="number" value="3" />
+        Yin Pose Hold Length (minutes):
+        <input id="lengthHoldInput" type="number" value="3" />
       </p>
       <p id="total-length">
         Total Yin Practice Length (minutes):
         <span id="totalLengthOutput">0</span>
       </p>
+      <p>
+        <button onclick="calculateYinLength()">Calculate Total Length</button>
+      </p>
+      <p id="errorMessage" style="color: red"></p>
     </main>
     <footer>
       <p>&copy; 2025 Yoga Timer</p>
