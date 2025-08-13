@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Yoga Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Yoga Timer</h1>
+    </header>
+    <main>
+      <p id="poses">
+        Number of Yin Poses: <input type="number" value="5" min="1" max="100" />
+      </p>
+      <p id="length-between">
+        Time Between Poses (minutes): <input type="number" value="1" />
+      </p>
+      <p id="length-hold">
+        Yin Pose Hold Length (minutes): <input type="number" value="3" />
+      </p>
+      <p id="total-length">
+        Total Yin Practice Length (minutes):
+        <span id="totalLengthOutput">0</span>
+      </p>
+    </main>
+    <footer>
+      <p>&copy; 2025 Yoga Timer</p>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
