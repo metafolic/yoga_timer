@@ -16,16 +16,13 @@ function isNonNegativeWholeNumber(value) {
 function isNonNegativeNumber(value) {
   const num = Number(value);
   if (Number.isNaN(num)) {
-    console.error("Invalid input: Please enter a valid number.");
+    alert("Please enter a valid number.");
+    return false;
   }
-  // Example: document.getElementById('errorMessage').textContent = "Please enter a number.";
-  else {
-    return !isNaN(num) && num > 0;
-  }
+  return num > 0;
 }
 
 function calculateYinLength() {
-  document.getElementById("errorMessage").textContent = ""; // Clear error message
   const { poses, lengthBetween, lengthHold } = getInputValues();
   // Use poses, lengthBetween, lengthHold for your calculation
 
@@ -35,11 +32,10 @@ function calculateYinLength() {
     !isNonNegativeNumber(lengthBetween) ||
     !isNonNegativeNumber(lengthHold)
   ) {
-    document.getElementById("errorMessage").textContent =
-      "Please enter valid, positive numbers for all fields. Poses must be a whole number.";
-    document.getElementById("totalLengthOutput").textContent = 0;
-    sum = 0;
-    return;
+  alert("Please enter valid, positive numbers for all fields. Poses must be a whole number.");
+  document.getElementById("totalLengthOutput").textContent = 0;
+  sum = 0;
+  return;
   }
   const posesNum = Number(poses);
   const lengthBetweenNum = Number(lengthBetween);
