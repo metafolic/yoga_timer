@@ -1,9 +1,91 @@
-#calc-yin {
+main p label {
+  display: block;
+  margin-bottom: 0.25em;
+}
+main p input[type="number"],
+main p input[type="text"] {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 1em;
+  font-size: 1em;
+  padding: 0.4em;
+  border-radius: 9999px;
+  border: 1px solid #f9f9f9;
+  font-family: "Montserrat", sans-serif;
+}
+
+#timerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 5rem;
+  width: 20rem;
+  border-radius: 8px;
+  min-width: 220px;
+  justify-content: center;
+}
+
+#clockFace {
+  margin-bottom: 1em;
+}
+
+#progressCircle {
+  transition: stroke 0.3s;
+}
+
+#progressCircle.running {
+  stroke: #6c63ff;
+}
+
+#progressCircle.paused {
+  stroke: #ff9800;
+}
+
+#progressCircle.done {
+  stroke: #4caf50;
+}
+
+#timerDisplay {
+  font-size: 2em;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 1em;
+}
+
+#timer-btns {
+  display: flex;
+  flex-direction: row;
+}
+
+#pauseBtn,
+#resetBtn {
+  background-color: #6c63ff;
+  color: #fff;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 9999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  margin: 0 0.5em;
+}
+
+#pauseBtn:hover,
+#pauseBtn:focus,
+#resetBtn:hover,
+#resetBtn:focus {
+  background-color: #554fd8;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+  outline: none;
+}
+#start-yin {
   background-color: #f9f9f9;
   color: #000000;
   border: none;
   padding: 0.8em 1.4em;
-  border-radius: 24px;
+  border-radius: 9999px;
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
   cursor: pointer;
@@ -12,8 +94,8 @@
   margin: 1rem 0;
 }
 
-#calc-yin:hover,
-#calc-yin:focus {
+#start-yin:hover,
+#start-yin:focus {
   background-color: #000000;
   color: #f9f9f9;
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
@@ -23,17 +105,35 @@ html,
 body {
   height: 100%;
 }
+body {
+  min-height: 100vh;
+}
 
 .container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  height: 100%;
+  width: 100%;
   background: linear-gradient(
     180deg,
     rgba(193, 48, 209, 0.16) 0%,
     rgba(199, 87, 154, 1) 49%,
     rgba(237, 221, 83, 1) 100%
   );
+}
+
+.main-flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-direction: row;
+  flex: 1;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 500px;
 }
 /* Global CSS Reset */
 * {
@@ -73,13 +173,9 @@ main p {
   font-size: 20px;
 }
 
-input[type="number"],
-textarea {
-  border: 1px solid #f9f9f9;
-  border-radius: 6px;
-  padding: 8px;
-  background-color: #f9f9f9;
+footer {
+  display: flex;
+  justify-content: center;
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
-  margin: 0.3rem;
+  padding: 1rem;
 }

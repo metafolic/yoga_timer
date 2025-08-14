@@ -16,43 +16,75 @@
   <body>
     <div class="container">
       <header>
-        <h1>Yoga Timer</h1>
+        <h1>Yin Yoga Timer</h1>
       </header>
-      <main>
-        <p id="poses">
-          <label for="posesInput">Number of Yin Poses:</label>
-          <input id="posesInput" type="number" value="5" min="1" max="100" />
-        </p>
-        <p id="length-between">
-          <label for="lengthBetweenInput">Time Between Poses (minutes):</label>
-          <input
-            id="lengthBetweenInput"
-            type="number"
-            value="1"
-            min="0.01"
-            step="any"
-          />
-        </p>
-        <p id="length-hold">
-          <label for="lengthHoldInput">Yin Pose Hold Length (minutes):</label>
-          <input
-            id="lengthHoldInput"
-            type="number"
-            value="3"
-            min="0.01"
-            step="any"
-          />
-        </p>
-        <p>
-          <button id="calc-yin" onclick="calculateYinLength()">
-            Calculate Total Length
-          </button>
-        </p>
-        <p id="total-length">
-          Total Yin Practice Length (minutes):
-          <span id="totalLengthOutput">0</span>
-        </p>
-        <p id="errorMessage"></p>
+      <main class="main-flex">
+        <div class="main-content">
+          <p id="poses">
+            <label for="posesInput">Number of Yin Poses:</label>
+            <input id="posesInput" type="number" value="5" min="1" max="100" />
+          </p>
+          <p id="length-between">
+            <label for="lengthBetweenInput"
+              >Time Between Poses (minutes):</label
+            >
+            <input
+              id="lengthBetweenInput"
+              type="number"
+              value="0.5"
+              min="0.1"
+              step="0.1"
+            />
+          </p>
+          <p id="length-hold">
+            <label for="lengthHoldInput">Yin Pose Hold Length (minutes):</label>
+            <input
+              id="lengthHoldInput"
+              type="number"
+              value="3"
+              min="0.5"
+              step="0.5"
+            />
+          </p>
+          <p id="total-length">
+            Total Yin Practice Length (minutes):
+            <span id="totalLengthOutput">0</span>
+          </p>
+          <p>
+            <button id="start-yin" onclick="startYinPractice()">
+              Start Yin Practice
+            </button>
+          </p>
+        </div>
+        <div id="timerContainer">
+          <svg id="clockFace" width="200" height="200">
+            <circle
+              cx="100"
+              cy="100"
+              r="90"
+              stroke="#ccc"
+              stroke-width="10"
+              fill="none"
+            />
+            <circle
+              id="progressCircle"
+              cx="100"
+              cy="100"
+              r="90"
+              stroke="#6c63ff"
+              stroke-width="10"
+              fill="none"
+              stroke-dasharray="565.48"
+              stroke-dashoffset="0"
+              transform="rotate(-90 100 100)"
+            />
+          </svg>
+          <div id="timerDisplay">00:00</div>
+          <div id="timer-btns">
+            <button id="pauseBtn" onclick="pauseTimer()">Pause</button>
+            <button id="resetBtn" onclick="resetTimer()">Reset</button>
+          </div>
+        </div>
       </main>
       <footer>
         <p>&copy; 2025 Yoga Timer</p>
