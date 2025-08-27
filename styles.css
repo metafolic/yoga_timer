@@ -7,7 +7,7 @@ main p input[type="text"] {
   display: block;
   width: 100%;
   max-width: 300px;
-  margin-bottom: 1em;
+  margin-bottom: 0.1rem;
   font-size: 1em;
   padding: 0.4em;
   border-radius: 9999px;
@@ -96,10 +96,25 @@ main p input[type="text"] {
 
 #start-yin:hover,
 #start-yin:focus {
-  background-color: #000000;
+  background-color: #6c63ff;
   color: #f9f9f9;
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
   outline: none;
+}
+
+#start-yin:disabled,
+#start-yin.disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+#start-yin:disabled:hover,
+#start-yin.disabled:hover {
+  background-color: #ccc;
+  color: #666;
+  box-shadow: none;
 }
 html,
 body {
@@ -178,4 +193,41 @@ footer {
   justify-content: center;
   font-family: "Montserrat", sans-serif;
   padding: 1rem;
+}
+
+/* Preset buttons styling */
+.preset-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0 8px;
+}
+
+.preset-buttons button {
+  background-color: #e8e8e8;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 0.4em 0.8em;
+  border-radius: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 45px;
+}
+
+.preset-buttons button:hover {
+  background-color: #6c63ff;
+  color: white;
+  border-color: #6c63ff;
+  transform: translateY(-1px);
+}
+
+.preset-buttons button:active {
+  transform: translateY(0);
+}
+
+.preset-buttons button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.3);
 }

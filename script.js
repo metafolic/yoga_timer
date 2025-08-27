@@ -58,7 +58,7 @@ function setClockState(state) {
   } else if (state === "paused") {
     timerContainer.style.background = "#FFEED9";
   } else if (state === "done") {
-    timerContainer.style.background = "#bfddc0ff";
+    timerContainer.style.background = "#a0bda1";
   } else {
     timerContainer.style.background = "transparent";
   }
@@ -122,6 +122,11 @@ function startClockTimer(duration) {
         clearInterval(clockTimerInterval);
         setClockState("done");
         document.getElementById("timerDisplay").textContent = "Done!";
+
+        // Re-enable start button when timer completes
+        const startBtn = document.getElementById("start-yin");
+        startBtn.disabled = false;
+        startBtn.textContent = "Start Yin Practice";
       }
     }
   }, 1000);
@@ -134,11 +139,17 @@ function resetTimer() {
   updateTimerDisplay();
   clockPaused = true;
   setClockState("paused");
+
   // Update pause button text to 'Resume'
   const pauseBtn = document.getElementById("pauseBtn");
   if (pauseBtn) {
     pauseBtn.textContent = "Resume";
   }
+
+  // Re-enable start button when timer is reset
+  const startBtn = document.getElementById("start-yin");
+  startBtn.disabled = false;
+  startBtn.textContent = "Start Yin Practice";
 }
 
 // Call this function to start the clock timer using sum (in minutes)
@@ -150,6 +161,13 @@ function startYinPractice() {
     );
     return;
   }
+
+  // Remove focus from the button and disable it during timer
+  const startBtn = document.getElementById("start-yin");
+  startBtn.blur();
+  startBtn.disabled = true;
+  startBtn.textContent = "Practice in Progress...";
+
   startClockTimer(sum * 60);
 }
 let sum = 0; // Define sum in the global scope
@@ -205,4 +223,15 @@ function playGong() {
   const gong = new Audio("single-gong.mp3");
   gong.loop = false;
   gong.play();
+}
+
+// Preset button functions
+function setLengthBetween(value) {
+  document.getElementById("lengthBetweenInput").value = value;
+  calculateYinLength(); // Recalculate total when preset is selected
+}
+
+function setLengthHold(value) {
+  document.getElementById("lengthHoldInput").value = value;
+  calculateYinLength(); // Recalculate total when preset is selected
 }
