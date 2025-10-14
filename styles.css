@@ -187,7 +187,7 @@ main p input[type="text"] {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   width: 500px;
-  min-height: 450px;
+  height: 450px;
   justify-content: space-between;
 }
 
@@ -263,32 +263,32 @@ main p input[type="text"] {
 
 /* Disabled button styling for consistent layout */
 #timer-btns button:disabled {
-  background-color: #e5e7eb;
-  color: #9ca3af;
+  background-color: #a5a0ff;
+  color: rgba(255, 255, 255, 0.7);
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5;
   box-shadow: none;
 }
 
 #timer-btns button:disabled:hover {
-  background-color: #e5e7eb;
-  color: #9ca3af;
+  background-color: #a5a0ff;
+  color: rgba(255, 255, 255, 0.7);
   box-shadow: none;
   transform: none;
 }
 
 #start-yin:disabled,
 #start-yin.disabled {
-  background-color: #ccc;
-  color: #666;
+  background-color: #a5a0ff;
+  color: rgba(255, 255, 255, 0.7);
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 #start-yin:disabled:hover,
 #start-yin.disabled:hover {
-  background-color: #ccc;
-  color: #666;
+  background-color: #a5a0ff;
+  color: rgba(255, 255, 255, 0.7);
   box-shadow: none;
 }
 
@@ -315,7 +315,7 @@ footer {
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
   width: 500px;
-  min-height: 450px;
+  height: 450px;
 }
 
 .form-card:hover {
