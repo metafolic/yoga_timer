@@ -3,10 +3,21 @@ function pauseTimer() {
   console.log("Pause button clicked, current paused state:", clockPaused);
   clockPaused = !clockPaused;
   setClockState(clockPaused ? "paused" : "running");
-  // Optionally update button text
+  // Update button text and icon
   const pauseBtn = document.getElementById("pauseBtn");
   if (pauseBtn) {
-    pauseBtn.textContent = clockPaused ? "Resume" : "Pause";
+    const btnText = pauseBtn.querySelector('.btn-text');
+    const btnIcon = pauseBtn.querySelector('.btn-icon');
+    if (btnText) {
+      btnText.textContent = clockPaused ? "Resume" : "Pause";
+    }
+    if (btnIcon) {
+      btnIcon.setAttribute('data-lucide', clockPaused ? 'play' : 'pause');
+      // Re-initialize icons
+      if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+      }
+    }
   }
 
   // If resuming and no interval is running, start the timer interval from current state
@@ -50,24 +61,19 @@ function pauseTimer() {
 function setClockState(state) {
   const circle = document.getElementById("progressCircle");
   const timerContainer = document.getElementById("timerContainer");
+  
+  // Remove all state classes
   circle.classList.remove("running", "paused", "done");
+  timerContainer.classList.remove("running", "paused", "done");
 
-  // Only add class if state is not empty
+  // Add new state class if provided
   if (state && state.trim()) {
     circle.classList.add(state);
+    timerContainer.classList.add(state);
   }
 
-  // Match background color to clock face color
-  if (state === "running") {
-    timerContainer.style.background = "#E5EDFF";
-  } else if (state === "paused") {
-    timerContainer.style.background = "#FFEED9";
-  } else if (state === "done") {
-    timerContainer.style.background = "#a0bda1";
-  } else {
-    // Reset to default background color from CSS
-    timerContainer.style.background = "#f9f9f9";
-  }
+  // Add subtle background color changes with CSS classes instead of inline styles
+  // This allows the CSS backdrop-filter and other effects to work properly
 }
 function updateTimerDisplay() {
   const minutes = Math.floor(clockTimeLeft / 60);
@@ -197,7 +203,18 @@ function resetTimer() {
     });
 
     if (pauseBtn) {
-      pauseBtn.textContent = "Pause";
+      const btnText = pauseBtn.querySelector('.btn-text');
+      const btnIcon = pauseBtn.querySelector('.btn-icon');
+      if (btnText) {
+        btnText.textContent = "Pause";
+      }
+      if (btnIcon) {
+        btnIcon.setAttribute('data-lucide', 'pause');
+        // Re-initialize icons
+        if (typeof lucide !== 'undefined') {
+          lucide.createIcons();
+        }
+      }
       console.log("✓ Reset pause button text");
     }
 

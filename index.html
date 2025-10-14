@@ -9,97 +9,146 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Satisfy&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Lucide Icons for modern iconography -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Yin Yoga Timer</h1>
+        <div class="header-content">
+          <h1>Yin Yoga Timer</h1>
+          <p class="subtitle">Find your flow with mindful timing</p>
+        </div>
       </header>
       <main class="main-flex">
         <div class="main-content">
-          <p id="poses">
-            <label for="posesInput">Number of Yin Poses:</label>
-            <input id="posesInput" type="number" value="5" min="1" max="100" />
-          </p>
-          <p id="length-between">
-            <label for="lengthBetweenInput"
-              >Time Between Poses (minutes):</label
-            >
-            <input
-              id="lengthBetweenInput"
-              type="number"
-              value="0.5"
-              min="0.0"
-              step="0.5"
-            />
-            <div class="preset-buttons">
-              <button type="button" onclick="setLengthBetween(0.2)">12s</button>
-              <button type="button" onclick="setLengthBetween(0.5)">30s</button>
-              <button type="button" onclick="setLengthBetween(0.6)">42s</button>
-              <button type="button" onclick="setLengthBetween(1)">1m</button>
+          <div class="form-card">
+            <div class="input-group">
+              <label for="posesInput">Number of Poses</label>
+              <div class="input-wrapper">
+                <i data-lucide="users" class="input-icon"></i>
+                <input id="posesInput" type="number" value="5" min="1" max="100" />
+              </div>
             </div>
-          </p>
-          <p id="length-hold">
-            <label for="lengthHoldInput">Yin Pose Hold Length (minutes):</label>
-            <input
-              id="lengthHoldInput"
-              type="number"
-              value="3"
-              min="0.5"
-              step="0.5"
-            />
-            <div class="preset-buttons">
-              <button type="button" onclick="setLengthHold(2)">2m</button>
-              <button type="button" onclick="setLengthHold(3)">3m</button>
-              <button type="button" onclick="setLengthHold(4)">4m</button>
-              <button type="button" onclick="setLengthHold(5)">5m</button>
+            
+            <div class="input-group">
+              <label for="lengthBetweenInput">Transition Time (minutes)</label>
+              <div class="input-wrapper">
+                <i data-lucide="clock" class="input-icon"></i>
+                <input
+                  id="lengthBetweenInput"
+                  type="number"
+                  value="0.5"
+                  min="0.0"
+                  step="0.5"
+                />
+              </div>
+              <div class="preset-buttons">
+                <button type="button" onclick="setLengthBetween(0.2)" class="preset-btn">12s</button>
+                <button type="button" onclick="setLengthBetween(0.5)" class="preset-btn">30s</button>
+                <button type="button" onclick="setLengthBetween(0.6)" class="preset-btn">42s</button>
+                <button type="button" onclick="setLengthBetween(1)" class="preset-btn">1m</button>
+              </div>
             </div>
-          </p>
-          <p id="total-length">
-            Total Yin Practice Length (minutes):
-            <span id="totalLengthOutput">0</span>
-          </p>
+            
+            <div class="input-group">
+              <label for="lengthHoldInput">Pose Duration (minutes)</label>
+              <div class="input-wrapper">
+                <i data-lucide="timer" class="input-icon"></i>
+                <input
+                  id="lengthHoldInput"
+                  type="number"
+                  value="3"
+                  min="0.5"
+                  step="0.5"
+                />
+              </div>
+              <div class="preset-buttons">
+                <button type="button" onclick="setLengthHold(2)" class="preset-btn">2m</button>
+                <button type="button" onclick="setLengthHold(3)" class="preset-btn">3m</button>
+                <button type="button" onclick="setLengthHold(4)" class="preset-btn">4m</button>
+                <button type="button" onclick="setLengthHold(5)" class="preset-btn">5m</button>
+              </div>
+            </div>
+            
+            <div class="total-time-card">
+              <div class="total-time-content">
+                <i data-lucide="calendar" class="total-icon"></i>
+                <div>
+                  <div class="total-label">Total Practice Time</div>
+                  <div class="total-time" id="totalLengthOutput">0:00</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="timerContainer">
-          <svg id="clockFace" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
-            <circle
-              cx="100"
-              cy="100"
-              r="90"
-              stroke="#ccc"
-              stroke-width="10"
-              fill="none"
-            />
-            <circle
-              id="progressCircle"
-              cx="100"
-              cy="100"
-              r="90"
-              stroke="#6c63ff"
-              stroke-width="10"
-              fill="none"
-              stroke-dasharray="565.48"
-              stroke-dashoffset="0"
-              transform="rotate(-90 100 100)"
-            />
-          </svg>
-          <div id="timerDisplay">00:00</div>
-          <div id="timer-btns">
-            <button id="start-yin" onclick="startYinPractice()">
-              Start Yin Practice
-            </button>
-            <button id="pauseBtn" onclick="pauseTimer()">Pause</button>
-            <button id="resetBtn" onclick="resetTimer()">Reset</button>
+        <div id="timerContainer" class="timer-card">
+          <div class="timer-content">
+            <div class="timer-circle-container">
+              <svg id="clockFace" width="220" height="220" viewBox="0 0 220 220" preserveAspectRatio="xMidYMid meet">
+                <!-- Background circle -->
+                <circle
+                  cx="110"
+                  cy="110"
+                  r="95"
+                  stroke="rgba(255, 255, 255, 0.2)"
+                  stroke-width="8"
+                  fill="none"
+                />
+                <!-- Progress circle -->
+                <circle
+                  id="progressCircle"
+                  cx="110"
+                  cy="110"
+                  r="95"
+                  stroke="#7c3aed"
+                  stroke-width="8"
+                  fill="none"
+                  stroke-dasharray="596.9"
+                  stroke-dashoffset="0"
+                  transform="rotate(-90 110 110)"
+                  stroke-linecap="round"
+                />
+                <!-- Inner circle for depth -->
+                <circle
+                  cx="110"
+                  cy="110"
+                  r="80"
+                  fill="rgba(255, 255, 255, 0.05)"
+                />
+              </svg>
+              <div id="timerDisplay" class="timer-display">00:00</div>
+            </div>
+            
+            <div id="timer-btns" class="timer-controls">
+              <button id="start-yin" onclick="startYinPractice()" class="primary-btn">
+                <i data-lucide="play" class="btn-icon"></i>
+                Start Practice
+              </button>
+              <button id="pauseBtn" onclick="pauseTimer()" class="secondary-btn">
+                <i data-lucide="pause" class="btn-icon"></i>
+                <span class="btn-text">Pause</span>
+              </button>
+              <button id="resetBtn" onclick="resetTimer()" class="secondary-btn">
+                <i data-lucide="rotate-ccw" class="btn-icon"></i>
+                Reset
+              </button>
+            </div>
           </div>
         </div>
       </main>
       <footer>
-        <p>&copy; 2025 Yoga Timer</p>
+        <p>&copy; 2025 Yoga Timer • Made with 🧘‍♀️ for mindful practice</p>
       </footer>
+      
       <script src="script.js"></script>
+      <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+      </script>
     </div>
   </body>
 </html>
