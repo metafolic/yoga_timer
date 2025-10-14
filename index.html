@@ -62,14 +62,9 @@
             Total Yin Practice Length (minutes):
             <span id="totalLengthOutput">0</span>
           </p>
-          <p>
-            <button id="start-yin" onclick="startYinPractice()">
-              Start Yin Practice
-            </button>
-          </p>
         </div>
         <div id="timerContainer">
-          <svg id="clockFace" width="200" height="200">
+          <svg id="clockFace" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
             <circle
               cx="100"
               cy="100"
@@ -93,6 +88,9 @@
           </svg>
           <div id="timerDisplay">00:00</div>
           <div id="timer-btns">
+            <button id="start-yin" onclick="startYinPractice()">
+              Start Yin Practice
+            </button>
             <button id="pauseBtn" onclick="pauseTimer()">Pause</button>
             <button id="resetBtn" onclick="resetTimer()">Reset</button>
           </div>

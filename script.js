@@ -1,5 +1,6 @@
 // Pause the timer and update UI
 function pauseTimer() {
+  console.log("Pause button clicked, current paused state:", clockPaused);
   clockPaused = !clockPaused;
   setClockState(clockPaused ? "paused" : "running");
   // Optionally update button text
@@ -50,7 +51,11 @@ function setClockState(state) {
   const circle = document.getElementById("progressCircle");
   const timerContainer = document.getElementById("timerContainer");
   circle.classList.remove("running", "paused", "done");
-  circle.classList.add(state);
+
+  // Only add class if state is not empty
+  if (state && state.trim()) {
+    circle.classList.add(state);
+  }
 
   // Match background color to clock face color
   if (state === "running") {
@@ -60,7 +65,8 @@ function setClockState(state) {
   } else if (state === "done") {
     timerContainer.style.background = "#a0bda1";
   } else {
-    timerContainer.style.background = "transparent";
+    // Reset to default background color from CSS
+    timerContainer.style.background = "#f9f9f9";
   }
 }
 function updateTimerDisplay() {
@@ -123,38 +129,107 @@ function startClockTimer(duration) {
         setClockState("done");
         document.getElementById("timerDisplay").textContent = "Done!";
 
-        // Re-enable start button when timer completes
+        // Show start button and hide control buttons when timer completes
         const startBtn = document.getElementById("start-yin");
-        startBtn.disabled = false;
-        startBtn.textContent = "Start Yin Practice";
+        const pauseBtn = document.getElementById("pauseBtn");
+        const resetBtn = document.getElementById("resetBtn");
+
+        startBtn.style.display = "block";
+        pauseBtn.style.display = "none";
+        resetBtn.style.display = "none";
+
+        // Reset timer interval reference
+        clockTimerInterval = null;
+
+        // After a brief delay, show the calculated practice time again
+        setTimeout(() => {
+          calculateYinLength();
+        }, 3000); // Show "Done!" for 3 seconds, then show practice time
       }
     }
   }, 1000);
 }
 
 function resetTimer() {
-  clockTimeLeft = clockTotalTime;
-  if (clockTimerInterval) clearInterval(clockTimerInterval);
-  updateClockFace();
-  updateTimerDisplay();
-  clockPaused = true;
-  setClockState("paused");
+  console.log("=== RESET FUNCTION CALLED ===");
+  console.log("Current state before reset:", {
+    clockPaused,
+    clockTimeLeft,
+    clockTotalTime,
+    hasInterval: !!clockTimerInterval,
+  });
 
-  // Update pause button text to 'Resume'
-  const pauseBtn = document.getElementById("pauseBtn");
-  if (pauseBtn) {
-    pauseBtn.textContent = "Resume";
+  try {
+    // Clear any running timer
+    if (clockTimerInterval) {
+      clearInterval(clockTimerInterval);
+      console.log("✓ Cleared timer interval");
+    }
+
+    // Reset ALL timer state completely
+    clockTimerInterval = null;
+    clockPaused = false;
+    clockTimeLeft = 0;
+    clockTotalTime = 0;
+    console.log("✓ Reset all timer variables");
+
+    // Reset visual state
+    setClockState("");
+    console.log("✓ Reset clock state");
+
+    // Reset the progress circle to completely empty
+    const circle = document.getElementById("progressCircle");
+    if (circle) {
+      const circumference = 2 * Math.PI * 90;
+      circle.setAttribute("stroke-dashoffset", circumference.toString());
+      console.log("✓ Reset progress circle");
+    }
+
+    // Update buttons
+    const startBtn = document.getElementById("start-yin");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    console.log("Found buttons for reset:", {
+      start: !!startBtn,
+      pause: !!pauseBtn,
+      reset: !!resetBtn,
+    });
+
+    if (pauseBtn) {
+      pauseBtn.textContent = "Pause";
+      console.log("✓ Reset pause button text");
+    }
+
+    if (startBtn) {
+      startBtn.style.display = "block";
+      console.log("✓ Showed start button");
+    }
+    if (pauseBtn) {
+      pauseBtn.style.display = "none";
+      console.log("✓ Hid pause button");
+    }
+    if (resetBtn) {
+      resetBtn.style.display = "none";
+      console.log("✓ Hid reset button");
+    }
+
+    // Show the calculated practice time
+    calculateYinLength();
+    console.log("✓ Recalculated practice time");
+
+    console.log("=== RESET COMPLETE ===");
+  } catch (error) {
+    console.error("Error in resetTimer:", error);
   }
-
-  // Re-enable start button when timer is reset
-  const startBtn = document.getElementById("start-yin");
-  startBtn.disabled = false;
-  startBtn.textContent = "Start Yin Practice";
 }
 
 // Call this function to start the clock timer using sum (in minutes)
 function startYinPractice() {
+  console.log("Start Yin Practice clicked");
   calculateYinLength();
+  console.log("Sum calculated:", sum);
+
   if (typeof sum === "undefined" || sum <= 0) {
     alert(
       "Please enter valid values and calculate the total length before starting the Yin practice."
@@ -162,11 +237,15 @@ function startYinPractice() {
     return;
   }
 
-  // Remove focus from the button and disable it during timer
+  // Hide start button and show control buttons
   const startBtn = document.getElementById("start-yin");
-  startBtn.blur();
-  startBtn.disabled = true;
-  startBtn.textContent = "Practice in Progress...";
+  const pauseBtn = document.getElementById("pauseBtn");
+  const resetBtn = document.getElementById("resetBtn");
+
+  console.log("Hiding start button, showing control buttons");
+  startBtn.style.display = "none";
+  pauseBtn.style.display = "block";
+  resetBtn.style.display = "block";
 
   startClockTimer(sum * 60);
 }
@@ -204,19 +283,40 @@ function calculateYinLength() {
     !isNonNegativeNumber(lengthBetween) ||
     !isNonNegativeNumber(lengthHold)
   ) {
-    alert(
-      "Please enter valid, positive numbers for all fields. Number of Yin Poses must be a whole number."
-    );
-    document.getElementById("totalLengthOutput").textContent = 0;
+    document.getElementById("totalLengthOutput").textContent = "0:00";
     sum = 0;
+    // Reset timer display to show 00:00 if invalid inputs
+    if (!clockTimerInterval) {
+      document.getElementById("timerDisplay").textContent = "00:00";
+    }
     return;
   }
   const posesNum = Number(poses);
   const lengthBetweenNum = Number(lengthBetween);
   const lengthHoldNum = Number(lengthHold);
+
+  // Calculate total time in minutes (keep as decimal for internal calculations)
   sum = (lengthBetweenNum + lengthHoldNum) * posesNum;
-  // Update the output span
-  document.getElementById("totalLengthOutput").textContent = sum;
+
+  // Convert to total seconds and format consistently
+  const totalSeconds = Math.round(sum * 60);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  // Format as MM:SS for both displays
+  const formattedTime = `${minutes.toString()}:${seconds
+    .toString()
+    .padStart(2, "0")}`;
+
+  // Update both displays with the same formatted time
+  document.getElementById("totalLengthOutput").textContent = formattedTime;
+
+  // Update the timer display to show total practice time (only when not actively timing)
+  if (!clockTimerInterval) {
+    document.getElementById("timerDisplay").textContent = `${minutes
+      .toString()
+      .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+  }
 }
 
 function playGong() {
@@ -235,3 +335,39 @@ function setLengthHold(value) {
   document.getElementById("lengthHoldInput").value = value;
   calculateYinLength(); // Recalculate total when preset is selected
 }
+
+// Initialize the application when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Page loaded - initializing");
+
+  // Calculate initial total length
+  calculateYinLength();
+
+  // Set initial button visibility
+  const startBtn = document.getElementById("start-yin");
+  const pauseBtn = document.getElementById("pauseBtn");
+  const resetBtn = document.getElementById("resetBtn");
+
+  console.log("Found buttons:", {
+    start: !!startBtn,
+    pause: !!pauseBtn,
+    reset: !!resetBtn,
+  });
+
+  startBtn.style.display = "block";
+  pauseBtn.style.display = "none";
+  resetBtn.style.display = "none";
+
+  // The onclick attributes in HTML are working fine, no need for duplicate event listeners
+
+  // Add event listeners to recalculate when inputs change
+  document
+    .getElementById("posesInput")
+    .addEventListener("input", calculateYinLength);
+  document
+    .getElementById("lengthBetweenInput")
+    .addEventListener("input", calculateYinLength);
+  document
+    .getElementById("lengthHoldInput")
+    .addEventListener("input", calculateYinLength);
+});
