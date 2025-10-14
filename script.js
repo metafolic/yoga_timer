@@ -1,10 +1,12 @@
 // Pause the timer and update UI
 function pauseTimer() {
+  const pauseBtn = document.getElementById("pauseBtn");
+  if (pauseBtn && pauseBtn.disabled) return;
+
   console.log("Pause button clicked, current paused state:", clockPaused);
   clockPaused = !clockPaused;
   setClockState(clockPaused ? "paused" : "running");
   // Optionally update button text
-  const pauseBtn = document.getElementById("pauseBtn");
   if (pauseBtn) {
     pauseBtn.textContent = clockPaused ? "Resume" : "Pause";
   }
@@ -50,24 +52,19 @@ function pauseTimer() {
 function setClockState(state) {
   const circle = document.getElementById("progressCircle");
   const timerContainer = document.getElementById("timerContainer");
-  circle.classList.remove("running", "paused", "done");
 
-  // Only add class if state is not empty
+  // Remove all state classes from both elements
+  circle.classList.remove("running", "paused", "done");
+  timerContainer.classList.remove("running", "paused", "done");
+
+  // Add new state class if provided
   if (state && state.trim()) {
     circle.classList.add(state);
+    timerContainer.classList.add(state);
   }
 
-  // Match background color to clock face color
-  if (state === "running") {
-    timerContainer.style.background = "#E5EDFF";
-  } else if (state === "paused") {
-    timerContainer.style.background = "#FFEED9";
-  } else if (state === "done") {
-    timerContainer.style.background = "#a0bda1";
-  } else {
-    // Reset to default background color from CSS
-    timerContainer.style.background = "#f9f9f9";
-  }
+  // Remove any inline background styles to let CSS handle it
+  timerContainer.style.background = "";
 }
 function updateTimerDisplay() {
   const minutes = Math.floor(clockTimeLeft / 60);
@@ -129,14 +126,14 @@ function startClockTimer(duration) {
         setClockState("done");
         document.getElementById("timerDisplay").textContent = "Done!";
 
-        // Show start button and hide control buttons when timer completes
+        // Enable start button and disable control buttons when timer completes
         const startBtn = document.getElementById("start-yin");
         const pauseBtn = document.getElementById("pauseBtn");
         const resetBtn = document.getElementById("resetBtn");
 
-        startBtn.style.display = "block";
-        pauseBtn.style.display = "none";
-        resetBtn.style.display = "none";
+        startBtn.disabled = false;
+        pauseBtn.disabled = true;
+        resetBtn.disabled = true;
 
         // Reset timer interval reference
         clockTimerInterval = null;
@@ -151,6 +148,9 @@ function startClockTimer(duration) {
 }
 
 function resetTimer() {
+  const resetBtn = document.getElementById("resetBtn");
+  if (resetBtn && resetBtn.disabled) return;
+
   console.log("=== RESET FUNCTION CALLED ===");
   console.log("Current state before reset:", {
     clockPaused,
@@ -202,16 +202,16 @@ function resetTimer() {
     }
 
     if (startBtn) {
-      startBtn.style.display = "block";
-      console.log("✓ Showed start button");
+      startBtn.disabled = false;
+      console.log("✓ Enabled start button");
     }
     if (pauseBtn) {
-      pauseBtn.style.display = "none";
-      console.log("✓ Hid pause button");
+      pauseBtn.disabled = true;
+      console.log("✓ Disabled pause button");
     }
     if (resetBtn) {
-      resetBtn.style.display = "none";
-      console.log("✓ Hid reset button");
+      resetBtn.disabled = true;
+      console.log("✓ Disabled reset button");
     }
 
     // Show the calculated practice time
@@ -226,6 +226,9 @@ function resetTimer() {
 
 // Call this function to start the clock timer using sum (in minutes)
 function startYinPractice() {
+  const startBtn = document.getElementById("start-yin");
+  if (startBtn && startBtn.disabled) return;
+
   console.log("Start Yin Practice clicked");
   calculateYinLength();
   console.log("Sum calculated:", sum);
@@ -237,15 +240,14 @@ function startYinPractice() {
     return;
   }
 
-  // Hide start button and show control buttons
-  const startBtn = document.getElementById("start-yin");
+  // Disable start button and enable control buttons
   const pauseBtn = document.getElementById("pauseBtn");
   const resetBtn = document.getElementById("resetBtn");
 
-  console.log("Hiding start button, showing control buttons");
-  startBtn.style.display = "none";
-  pauseBtn.style.display = "block";
-  resetBtn.style.display = "block";
+  console.log("Disabling start button, enabling control buttons");
+  startBtn.disabled = true;
+  pauseBtn.disabled = false;
+  resetBtn.disabled = false;
 
   startClockTimer(sum * 60);
 }
@@ -354,9 +356,9 @@ document.addEventListener("DOMContentLoaded", function () {
     reset: !!resetBtn,
   });
 
-  startBtn.style.display = "block";
-  pauseBtn.style.display = "none";
-  resetBtn.style.display = "none";
+  startBtn.disabled = false;
+  pauseBtn.disabled = true;
+  resetBtn.disabled = true;
 
   // The onclick attributes in HTML are working fine, no need for duplicate event listeners
 
