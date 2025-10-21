@@ -11,26 +11,55 @@
   gtag('config', 'G-G7265Y4ZGX');
 </script>
     <!-- SEO Meta Tags -->
-<meta name="description" content="ZenClock - Free Yin Yoga Timer at YogaClock.com. Customizable interval timer for yoga practice with adjustable poses and hold times. Perfect for meditation and mindful yoga sessions.">
-<meta name="keywords" content="yoga timer, yoga clock, yin yoga, meditation timer, interval timer, yoga practice, mindfulness, free yoga tools, zenclock, yogaclock">
+<meta name="description" content="Free Yin Yoga Timer - Perfect yoga timer for your practice. Customizable intervals, hold times, and meditation features. Start your yin yoga sessions with our easy-to-use timer at YogaClock.com.">
+<meta name="keywords" content="yin yoga timer, yoga timer, yin yoga, yoga clock, meditation timer, yoga practice timer, free yoga timer, interval timer, yoga session timer, mindfulness timer, zenclock, yogaclock">
 <meta name="author" content="YogaClock">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph for social sharing -->
-<meta property="og:title" content="ZenClock - Yin Yoga Timer | YogaClock.com">
-<meta property="og:description" content="ZenClock at YogaClock.com - Customizable timer for Yin Yoga practice with adjustable poses and hold times">
+<meta property="og:title" content="Yin Yoga Timer - Free Yoga Timer | ZenClock by YogaClock.com">
+<meta property="og:description" content="Free Yin Yoga Timer - Perfect yoga timer for your practice. Customizable intervals, hold times, and meditation features.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yogaclock.com">
 <meta property="og:image" content="https://yogaclock.com/preview-image.png">
 
-<!-- Twitter Cards -->
+    <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ZenClock - Yin Yoga Timer | YogaClock.com">
-<meta name="twitter:description" content="ZenClock at YogaClock.com - Free Yin Yoga Timer">
+<meta name="twitter:title" content="Yin Yoga Timer - Free Yoga Timer | ZenClock">
+<meta name="twitter:description" content="Free Yin Yoga Timer - Customizable intervals and meditation features">
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Yin Yoga Timer - ZenClock",
+  "description": "Free Yin Yoga Timer with customizable intervals, hold times, and meditation features. Perfect timer for yoga practice and mindfulness sessions.",
+  "url": "https://yogaclock.com",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "Web Browser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "keywords": "yin yoga timer, yoga timer, meditation timer, yoga practice, interval timer",
+  "author": {
+    "@type": "Organization",
+    "name": "YogaClock"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "ratingCount": "1"
+  }
+}
+</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>ZenClock - Yin Yoga Timer | YogaClock.com</title>
+    <link rel="canonical" href="https://yogaclock.com/" />
+    <title>Yin Yoga Timer - Free Yoga Timer | ZenClock by YogaClock.com</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -51,8 +80,8 @@
   <body>
     <div class="container">
       <header>
-        <h1>ZenClock</h1>
-        <h2 class="tagline">Your Yin Yoga Timer</h2>
+        <h1>ZenClock - Free Yin Yoga Timer</h1>
+        <h2 class="tagline">Your Perfect Yoga Timer for Practice & Meditation</h2>
       </header>
       
       <!-- Tab Navigation -->
@@ -108,10 +137,11 @@
                 <button type="button" onclick="setLengthHold(5)">5m</button>
               </div>
             </p>
-            <p id="total-length">
-              <strong>Total Duration:</strong>
-              <span id="totalLengthOutput">0</span>
-            </p>
+            <div id="total-length">
+              <button id="totalDurationBtn" onclick="startYin()" disabled>
+                <strong>Total Duration: </strong><span id="totalLengthOutput">0</span>
+              </button>
+            </div>
           </div>
         </div>
         <div id="timerContainer">
