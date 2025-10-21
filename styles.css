@@ -235,7 +235,7 @@ main p input[type="text"] {
 }
 
 #progressCircle.running {
-  stroke: #6c63ff;
+  stroke: #8b5cf6;
 }
 
 #progressCircle.paused {
