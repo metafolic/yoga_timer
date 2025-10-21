@@ -143,12 +143,7 @@
           
           <div class="contact-methods">
             <div class="contact-item">
-              <h3>💌 Email</h3>
-              <p><a href="mailto:hello@yogaclock.com">hello@yogaclock.com</a></p>
-            </div>
-            
-            <div class="contact-item">
-              <h3>🐙 GitHub</h3>
+              <h3> GitHub</h3>
               <p><a href="https://github.com/metafolic/yoga_timer" target="_blank">Report issues or contribute</a></p>
             </div>
             
@@ -160,7 +155,8 @@
           
           <div class="contact-form">
             <h3>Quick Message</h3>
-            <form action="mailto:hello@yogaclock.com" method="post" enctype="text/plain">
+            <form name="contact" method="POST" data-netlify="true">
+              <input type="hidden" name="form-name" value="contact" />
               <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" required>
