@@ -373,3 +373,184 @@ document.addEventListener("DOMContentLoaded", function () {
     .getElementById("lengthHoldInput")
     .addEventListener("input", calculateYinLength);
 });
+
+// =============================================
+// TAB SYSTEM
+// =============================================
+function switchTab(tabName) {
+  // Remove active class from all tabs and buttons
+  document.querySelectorAll(".tab-content").forEach((tab) => {
+    tab.classList.remove("active");
+  });
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.classList.remove("active");
+  });
+
+  // Add active class to selected tab and button
+  document.getElementById(tabName + "-tab").classList.add("active");
+  event.target.classList.add("active");
+
+  // Reset any running timers when switching tabs
+  if (tabName === "meditation") {
+    resetMeditation();
+  } else {
+    resetTimer();
+  }
+}
+
+// =============================================
+// MEDITATION TIMER
+// =============================================
+let meditationTimer = null;
+let meditationTimeLeft = 0;
+let meditationTotalTime = 0;
+let meditationPaused = false;
+
+// Meditation timer now uses the same gong sound as yin yoga timer
+
+// Use the same gong sound as the yin yoga timer for both start and end
+function playMeditationBell() {
+  playGong(); // Uses the same single-gong.mp3 as yin yoga timer
+}
+
+function playMeditationGong() {
+  playGong(); // Uses the same single-gong.mp3 as yin yoga timer
+}
+
+function setMeditationTime(minutes) {
+  document.getElementById("meditationMinutes").value = minutes;
+  updateMeditationDisplay();
+}
+
+function updateMeditationDisplay() {
+  const minutes = Math.floor(meditationTimeLeft / 60);
+  const seconds = meditationTimeLeft % 60;
+  const display = `${minutes.toString().padStart(2, "0")}:${seconds
+    .toString()
+    .padStart(2, "0")}`;
+  document.getElementById("meditationDisplay").textContent = display;
+}
+
+function updateMeditationProgress() {
+  const progress = document.getElementById("meditationProgress");
+  const circumference = 2 * Math.PI * 90; // radius = 90 (matches yoga timer)
+  const progressPercent =
+    (meditationTotalTime - meditationTimeLeft) / meditationTotalTime;
+  const offset = circumference - progressPercent * circumference;
+  progress.style.strokeDashoffset = offset;
+}
+
+function startMeditationTimer() {
+  const minutes = parseInt(document.getElementById("meditationMinutes").value);
+  const startBell = document.getElementById("startBell").checked;
+
+  if (meditationTimer) {
+    clearInterval(meditationTimer);
+  }
+
+  meditationTimeLeft = minutes * 60;
+  meditationTotalTime = meditationTimeLeft;
+  meditationPaused = false;
+
+  // Play start bell if enabled
+  if (startBell) {
+    playMeditationBell();
+  }
+
+  // Update UI
+  document.getElementById("meditation-status").textContent = "Meditating...";
+  document.getElementById("startMeditation").textContent = "🧘‍♀️ Meditating";
+  document.getElementById("startMeditation").disabled = true;
+  document.getElementById("pauseMeditation").disabled = false;
+  document.getElementById("resetMeditation").disabled = false;
+
+  // Start timer
+  meditationTimer = setInterval(() => {
+    if (!meditationPaused && meditationTimeLeft > 0) {
+      meditationTimeLeft--;
+      updateMeditationDisplay();
+      updateMeditationProgress();
+
+      if (meditationTimeLeft === 0) {
+        finishMeditation();
+      }
+    }
+  }, 1000);
+
+  updateMeditationDisplay();
+  updateMeditationProgress();
+}
+
+function finishMeditation() {
+  const endGong = document.getElementById("endGong").checked;
+
+  clearInterval(meditationTimer);
+  meditationTimer = null;
+
+  // Play end gong if enabled
+  if (endGong) {
+    playMeditationGong();
+  }
+
+  // Update UI
+  document.getElementById("meditation-status").textContent =
+    "Meditation complete! 🙏";
+  document.getElementById("meditationDisplay").textContent = "00:00";
+  document.getElementById("startMeditation").textContent =
+    "🧘‍♀️ Start Meditation";
+  document.getElementById("startMeditation").disabled = false;
+  document.getElementById("pauseMeditation").disabled = true;
+  document.getElementById("resetMeditation").disabled = true;
+
+  // Reset progress circle
+  document.getElementById("meditationProgress").style.strokeDashoffset = 0;
+}
+
+function pauseMeditation() {
+  const pauseBtn = document.getElementById("pauseMeditation");
+
+  meditationPaused = !meditationPaused;
+
+  if (meditationPaused) {
+    pauseBtn.textContent = "Resume";
+    document.getElementById("meditation-status").textContent = "Paused";
+  } else {
+    pauseBtn.textContent = "Pause";
+    document.getElementById("meditation-status").textContent = "Meditating...";
+  }
+}
+
+function resetMeditation() {
+  if (meditationTimer) {
+    clearInterval(meditationTimer);
+    meditationTimer = null;
+  }
+
+  meditationPaused = false;
+
+  // Reset to initial time
+  const minutes = parseInt(document.getElementById("meditationMinutes").value);
+  meditationTimeLeft = minutes * 60;
+  meditationTotalTime = meditationTimeLeft;
+
+  // Update UI
+  updateMeditationDisplay();
+  document.getElementById("meditation-status").textContent = "Ready to begin";
+  document.getElementById("startMeditation").textContent =
+    "🧘‍♀️ Start Meditation";
+  document.getElementById("startMeditation").disabled = false;
+  document.getElementById("pauseMeditation").textContent = "Pause";
+  document.getElementById("pauseMeditation").disabled = true;
+  document.getElementById("resetMeditation").disabled = true;
+
+  // Reset progress circle
+  document.getElementById("meditationProgress").style.strokeDashoffset = 0;
+}
+
+// Initialize meditation timer display on page load
+document.addEventListener("DOMContentLoaded", function () {
+  const minutes = parseInt(document.getElementById("meditationMinutes").value);
+  meditationTimeLeft = minutes * 60;
+  meditationTotalTime = meditationTimeLeft;
+  updateMeditationDisplay();
+});

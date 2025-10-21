@@ -54,8 +54,21 @@
         <h1>ZenClock</h1>
         <h2 class="tagline">Your Yin Yoga Timer</h2>
       </header>
+      
+      <!-- Tab Navigation -->
+      <nav class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('yoga')">
+          🧘‍♀️ Yin Yoga Timer
+        </button>
+        <button class="tab-btn" onclick="switchTab('meditation')">
+          🔔 Meditation Timer
+        </button>
+      </nav>
+      
       <main class="main-flex">
-        <div class="main-content">
+        <!-- Yin Yoga Timer Tab -->
+        <div id="yoga-tab" class="tab-content active">
+          <div class="main-content">
           <div class="form-card">
             <p id="poses">
               <label for="posesInput">Number of Yin Poses:</label>
@@ -131,6 +144,75 @@
             </button>
             <button id="pauseBtn" onclick="pauseTimer()">Pause</button>
             <button id="resetBtn" onclick="resetTimer()">Reset</button>
+          </div>
+          </div>
+        </div>
+        
+        <!-- Meditation Timer Tab -->
+        <div id="meditation-tab" class="tab-content">
+          <div class="main-content">
+            <div class="form-card">
+              <p id="meditation-duration">
+                <label for="meditationMinutes">Meditation Duration (minutes):</label>
+                <input id="meditationMinutes" type="number" value="10" min="1" max="120" />
+              </p>
+              <div class="preset-buttons">
+                <button type="button" onclick="setMeditationTime(5)">5m</button>
+                <button type="button" onclick="setMeditationTime(10)">10m</button>
+                <button type="button" onclick="setMeditationTime(15)">15m</button>
+                <button type="button" onclick="setMeditationTime(20)">20m</button>
+                <button type="button" onclick="setMeditationTime(30)">30m</button>
+              </div>
+              
+              <div class="meditation-settings">
+                <p>
+                  <label>
+                    <input type="checkbox" id="startBell" checked>
+                    Start with gong sound
+                  </label>
+                </p>
+                <p>
+                  <label>
+                    <input type="checkbox" id="endGong" checked>
+                    End with gong sound
+                  </label>
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <div id="meditationContainer">
+            <svg id="meditationClock" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+              <circle
+                cx="100"
+                cy="100"
+                r="90"
+                stroke="#ccc"
+                stroke-width="10"
+                fill="none"
+              />
+              <circle
+                id="meditationProgress"
+                cx="100"
+                cy="100"
+                r="90"
+                stroke="#8B5CF6"
+                stroke-width="10"
+                fill="none"
+                stroke-dasharray="565.48"
+                stroke-dashoffset="0"
+                transform="rotate(-90 100 100)"
+              />
+            </svg>
+            <div id="meditationDisplay">10:00</div>
+            <div id="meditation-status">Ready to begin</div>
+            <div id="meditation-btns">
+              <button id="startMeditation" onclick="startMeditationTimer()">
+                🧘‍♀️ Start Meditation
+              </button>
+              <button id="pauseMeditation" onclick="pauseMeditation()">Pause</button>
+              <button id="resetMeditation" onclick="resetMeditation()">Reset</button>
+            </div>
           </div>
         </div>
       </main>
