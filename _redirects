@@ -1,0 +1,16 @@
+# Redirect www to non-www (canonical URL)
+
+https://www.yogaclock.com/* https://yogaclock.com/:splat 301!
+
+# Redirect old Netlify domain to new domain
+
+https://yogatimerapp.netlify.app/* https://yogaclock.com/:splat 301!
+
+# Redirect HTTP to HTTPS
+
+http://yogaclock.com/_ https://yogaclock.com/:splat 301!
+http://www.yogaclock.com/_ https://yogaclock.com/:splat 301!
+
+# Handle SPA routing (if needed in the future)
+
+/\* /index.html 200
