@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://yogatimerapp.netlify.app/sitemap.xml
+Sitemap: https://yogaclock.com/sitemap.xml
