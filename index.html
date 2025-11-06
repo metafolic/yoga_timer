@@ -97,10 +97,10 @@
       
       <!-- Tab Navigation -->
       <nav class="tab-nav">
-        <button class="tab-btn active" onclick="switchTab('yoga')">
+        <button class="tab-btn active" onclick="switchTab('yoga', this)">
           🧘‍♀️ Yin Yoga Timer
         </button>
-        <button class="tab-btn" onclick="switchTab('meditation')">
+        <button class="tab-btn" onclick="switchTab('meditation', this)">
           🔔 Meditation Timer
         </button>
       </nav>
@@ -108,7 +108,6 @@
       <main class="main-flex">
         <!-- Yin Yoga Timer Tab -->
         <div id="yoga-tab" class="tab-content active">
-          <div class="main-content">
           <div class="form-card">
             <p id="poses">
               <label for="posesInput">Number of Yin Poses:</label>
@@ -116,31 +115,31 @@
             </p>
             <p id="length-between">
               <label for="lengthBetweenInput"
-                >Time Between Poses (minutes):</label
+                >Time Between Poses:</label
               >
               <input
                 id="lengthBetweenInput"
                 type="number"
-                value="0.5"
-                min="0.0"
-                step="0.5"
-              />
+                value="30"
+                min="0"
+                step="1"
+              /> seconds
               <div class="preset-buttons">
-                <button type="button" onclick="setLengthBetween(0.2)">12s</button>
-                <button type="button" onclick="setLengthBetween(0.5)">30s</button>
-                <button type="button" onclick="setLengthBetween(0.6)">42s</button>
-                <button type="button" onclick="setLengthBetween(1)">1m</button>
+                <button type="button" onclick="setLengthBetween(15)">15s</button>
+                <button type="button" onclick="setLengthBetween(30)">30s</button>
+                <button type="button" onclick="setLengthBetween(45)">45s</button>
+                <button type="button" onclick="setLengthBetween(60)">1m</button>
               </div>
             </p>
             <p id="length-hold">
-              <label for="lengthHoldInput">Yin Pose Hold Length (minutes):</label>
+              <label for="lengthHoldInput">Yin Pose Hold Length:</label>
               <input
                 id="lengthHoldInput"
                 type="number"
                 value="3"
                 min="0.5"
                 step="0.5"
-              />
+              /> minutes
               <div class="preset-buttons">
                 <button type="button" onclick="setLengthHold(2)">2m</button>
                 <button type="button" onclick="setLengthHold(3)">3m</button>
@@ -148,14 +147,8 @@
                 <button type="button" onclick="setLengthHold(5)">5m</button>
               </div>
             </p>
-            <div id="total-length">
-              <button id="totalDurationBtn" onclick="startYin()" disabled>
-                <strong>Total Duration: </strong><span id="totalLengthOutput">0</span>
-              </button>
-            </div>
           </div>
-        </div>
-        <div id="timerContainer">
+          <div id="timerContainer">
           <svg id="clockFace" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
             <circle
               cx="100"
@@ -179,6 +172,7 @@
             />
           </svg>
           <div id="timerDisplay">00:00</div>
+          <div id="timer-status">Ready to begin</div>
           <div id="timer-btns">
             <button id="start-yin" onclick="startYinPractice()">
               Start Yin Practice
@@ -191,11 +185,10 @@
         
         <!-- Meditation Timer Tab -->
         <div id="meditation-tab" class="tab-content">
-          <div class="main-content">
             <div class="form-card">
               <p id="meditation-duration">
-                <label for="meditationMinutes">Meditation Duration (minutes):</label>
-                <input id="meditationMinutes" type="number" value="10" min="1" max="120" />
+                <label for="meditationMinutes">Meditation Duration:</label>
+                <input id="meditationMinutes" type="number" value="10" min="1" max="120" /> minutes
               </p>
               <div class="preset-buttons">
                 <button type="button" onclick="setMeditationTime(5)">5m</button>
@@ -220,7 +213,6 @@
                 </p>
               </div>
             </div>
-          </div>
           
           <div id="meditationContainer">
             <svg id="meditationClock" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
@@ -248,8 +240,7 @@
             <div id="meditationDisplay">10:00</div>
             <div id="meditation-status">Ready to begin</div>
             <div id="meditation-btns">
-              <button id="startMeditation" onclick="startMeditationTimer()">
-                🧘‍♀️ Start Meditation
+              <button id="startMeditation" onclick="startMeditationTimer()">Start Meditation
               </button>
               <button id="pauseMeditation" onclick="pauseMeditation()">Pause</button>
               <button id="resetMeditation" onclick="resetMeditation()">Reset</button>

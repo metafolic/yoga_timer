@@ -14,8 +14,9 @@ function pauseTimer() {
   // If resuming and no interval is running, start the timer interval from current state
   if (!clockPaused && !clockTimerInterval) {
     let elapsed = clockTotalTime - clockTimeLeft;
-    const lengthBetween =
-      Number(document.getElementById("lengthBetweenInput").value) * 60;
+    const lengthBetween = Number(
+      document.getElementById("lengthBetweenInput").value
+    );
     const lengthHold =
       Number(document.getElementById("lengthHoldInput").value) * 60;
     let nextGong = lengthBetween + lengthHold;
@@ -93,8 +94,9 @@ function startClockTimer(duration) {
   setClockState("running");
 
   let elapsed = 0;
-  const lengthBetween =
-    Number(document.getElementById("lengthBetweenInput").value) * 60;
+  const lengthBetween = Number(
+    document.getElementById("lengthBetweenInput").value
+  );
   const lengthHold =
     Number(document.getElementById("lengthHoldInput").value) * 60;
 
@@ -285,7 +287,6 @@ function calculateYinLength() {
     !isNonNegativeNumber(lengthBetween) ||
     !isNonNegativeNumber(lengthHold)
   ) {
-    document.getElementById("totalLengthOutput").textContent = "0:00";
     sum = 0;
     // Reset timer display to show 00:00 if invalid inputs
     if (!clockTimerInterval) {
@@ -297,21 +298,13 @@ function calculateYinLength() {
   const lengthBetweenNum = Number(lengthBetween);
   const lengthHoldNum = Number(lengthHold);
 
-  // Calculate total time in minutes (keep as decimal for internal calculations)
-  sum = (lengthBetweenNum + lengthHoldNum) * posesNum;
+  // Calculate total time in minutes (convert lengthBetween from seconds to minutes)
+  sum = (lengthBetweenNum / 60 + lengthHoldNum) * posesNum;
 
   // Convert to total seconds and format consistently
   const totalSeconds = Math.round(sum * 60);
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
-
-  // Format as MM:SS for both displays
-  const formattedTime = `${minutes.toString()}:${seconds
-    .toString()
-    .padStart(2, "0")}`;
-
-  // Update both displays with the same formatted time
-  document.getElementById("totalLengthOutput").textContent = formattedTime;
 
   // Update the timer display to show total practice time (only when not actively timing)
   if (!clockTimerInterval) {
@@ -377,18 +370,27 @@ document.addEventListener("DOMContentLoaded", function () {
 // =============================================
 // TAB SYSTEM
 // =============================================
-function switchTab(tabName) {
-  // Remove active class from all tabs and buttons
+function switchTab(tabName, buttonElement) {
+  // Hide ALL tabs by removing active class
   document.querySelectorAll(".tab-content").forEach((tab) => {
     tab.classList.remove("active");
   });
+
+  // Remove active class from all tab buttons
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.classList.remove("active");
   });
 
-  // Add active class to selected tab and button
-  document.getElementById(tabName + "-tab").classList.add("active");
-  event.target.classList.add("active");
+  // Show target tab by adding active class
+  const targetTab = document.getElementById(tabName + "-tab");
+  if (targetTab) {
+    targetTab.classList.add("active");
+  }
+
+  // Add active class to the clicked button
+  if (buttonElement) {
+    buttonElement.classList.add("active");
+  }
 
   // Reset any running timers when switching tabs
   if (tabName === "meditation") {
@@ -554,3 +556,53 @@ document.addEventListener("DOMContentLoaded", function () {
   meditationTotalTime = meditationTimeLeft;
   updateMeditationDisplay();
 });
+
+// Modal functions
+function openInfoModal() {
+  const modal = document.getElementById("infoModal");
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden"; // Prevent background scrolling
+}
+
+function closeInfoModal() {
+  const modal = document.getElementById("infoModal");
+  modal.classList.remove("active");
+  document.body.style.overflow = ""; // Restore scrolling
+}
+
+// Close modal with Escape key
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeInfoModal();
+    closeBeginnerModal();
+  }
+});
+
+// Beginner Practice Modal functions
+function openBeginnerPractice() {
+  const modal = document.getElementById("beginnerModal");
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden"; // Prevent background scrolling
+}
+
+function closeBeginnerModal() {
+  const modal = document.getElementById("beginnerModal");
+  modal.classList.remove("active");
+  document.body.style.overflow = ""; // Restore scrolling
+}
+
+function startBeginnerPractice() {
+  // Set the default beginner values
+  document.getElementById("posesInput").value = 6;
+  document.getElementById("lengthBetweenInput").value = 30;
+  document.getElementById("lengthHoldInput").value = 2;
+
+  // Recalculate the timer display
+  calculateYinLength();
+
+  // Close the modal
+  closeBeginnerModal();
+
+  // Start the practice automatically
+  startYinPractice();
+}

@@ -1,0 +1,47 @@
+{
+  "CallerReference": "yogaclock-20251104-v2",
+  "Comment": "YogaClock.com CDN Distribution",
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "yogaclock-s3-origin",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "MinTTL": 0,
+    "DefaultTTL": 86400,
+    "MaxTTL": 31536000,
+    "Compress": true,
+    "ForwardedValues": {
+      "QueryString": false,
+      "Cookies": {
+        "Forward": "none"
+      }
+    },
+    "TrustedSigners": {
+      "Enabled": false,
+      "Quantity": 0
+    }
+  },
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "yogaclock-s3-origin",
+        "DomainName": "yogaclock-com-static.s3-website-us-east-1.amazonaws.com",
+        "CustomOriginConfig": {
+          "HTTPPort": 80,
+          "HTTPSPort": 443,
+          "OriginProtocolPolicy": "http-only"
+        }
+      }
+    ]
+  },
+  "Enabled": true,
+  "Aliases": {
+    "Quantity": 2,
+    "Items": ["yogaclock.com", "www.yogaclock.com"]
+  },
+  "DefaultRootObject": "index.html",
+  "ViewerCertificate": {
+    "ACMCertificateArn": "arn:aws:acm:us-east-1:874382053353:certificate/78b74e62-e7ea-419a-8e21-bcac4d5cfb7b",
+    "SSLSupportMethod": "sni-only",
+    "MinimumProtocolVersion": "TLSv1.2_2021"
+  }
+}

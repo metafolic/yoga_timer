@@ -65,11 +65,6 @@ body {
   z-index: 1;
 }
 
-.main-content {
-  flex: 1;
-  max-width: 500px;
-}
-
 /* =============================================
    HEADER STYLES
    ============================================= */
@@ -99,6 +94,64 @@ header h1 {
   margin-bottom: 1rem;
   font-style: italic;
   letter-spacing: 0.5px;
+}
+
+/* Info trigger button */
+.info-trigger {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.info-trigger:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.question-mark {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Beginner practice button */
+.beginner-practice-btn {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border: 1px solid #f9f9f9;
+  border-radius: 9999px;
+  color: white;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0.6em 0.4em;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.beginner-practice-btn:hover {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
 }
 
 /* =============================================
@@ -136,45 +189,16 @@ main p input[type="text"] {
   font-family: "Montserrat", sans-serif;
 }
 
-#total-length {
-  margin: 0.1rem 0;
-}
-
-#totalDurationBtn {
-  font-weight: 600;
-  font-size: 20px;
-  padding: 0.8rem 1rem;
-  text-align: center;
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
-  border: none;
-  border-radius: 12px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  font-family: "Montserrat", sans-serif;
-}
-
-#totalDurationBtn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #7c3aed, #9333ea);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-}
-
-#totalDurationBtn:disabled {
-  background: linear-gradient(135deg, #d1d5db, #e5e7eb);
-  color: #9ca3af;
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-#totalDurationBtn strong {
-  color: inherit;
-}
-
-#totalLengthOutput {
-  font-weight: 700;
-  margin-left: 0.5rem;
+/* Inline input with unit text */
+#length-hold input[type="number"],
+#length-between input[type="number"],
+#poses input[type="number"],
+#meditation-duration input[type="number"] {
+  display: inline-block;
+  width: 240px;
+  margin-right: 8px;
+  margin-bottom: 0;
+  vertical-align: middle;
 }
 
 /* =============================================
@@ -231,11 +255,14 @@ main p input[type="text"] {
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
     0 1px 0 rgba(255, 255, 255, 0.2) inset;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */ /* Commenting out the border */
   transition: all 0.3s ease;
   width: 500px;
   height: 480px;
   justify-content: space-between;
+  flex-shrink: 0;
+  min-width: 500px;
+  min-height: 480px;
 }
 
 #timerContainer:hover {
@@ -269,8 +296,10 @@ main p input[type="text"] {
 
 #timerDisplay {
   font-size: 2em;
+  font-weight: 700;
+  color: #8b5cf6;
+  text-align: center;
   font-family: "Montserrat", sans-serif;
-  margin-bottom: 1em;
 }
 
 #timer-btns {
@@ -291,35 +320,34 @@ main p input[type="text"] {
   transition: all 0.3s ease;
 }
 
+#start-yin {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+#start-yin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
 #pauseBtn,
 #resetBtn {
-  background: white;
-  color: #6b7280;
-  border: 2px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.9);
+  color: #8b5cf6;
+  border: 2px solid rgba(139, 92, 246, 0.3);
 }
 
 #pauseBtn:hover,
 #resetBtn:hover {
-  background: #f9fafb;
-  border-color: #d1d5db;
+  background: rgba(255, 255, 255, 1);
+  border-color: #8b5cf6;
   transform: translateY(-2px);
 }
 
 #timer-btns button:focus {
   outline: none;
-}
-
-#start-yin {
-  background: linear-gradient(135deg, #8b5cf6, #a855f7);
-  color: white;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-  border: none;
-}
-
-#start-yin:hover {
-  background: linear-gradient(135deg, #7c3aed, #9333ea);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-  transform: translateY(-2px);
 }
 
 /* Disabled button styling for consistent layout */
@@ -329,7 +357,7 @@ main p input[type="text"] {
   cursor: not-allowed;
   opacity: 0.5;
   box-shadow: none;
-  border: 2px solid #e5e7eb;
+  border: none;
 }
 
 #timer-btns button:disabled:hover {
@@ -380,6 +408,7 @@ footer {
   transition: all 0.3s ease;
   width: 500px;
   height: 480px;
+  position: relative;
 }
 
 .form-card:hover {
@@ -437,6 +466,10 @@ footer {
   }
 
   /* Layout changes for mobile */
+  body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+
   .main-flex {
     flex-direction: column;
     align-items: center;
@@ -444,11 +477,11 @@ footer {
     padding: 0 1rem;
   }
 
-  .main-content {
+  .tab-content.active {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
     width: 100%;
-    max-width: none;
-    display: flex;
-    justify-content: center;
   }
 
   /* Input adjustments */
@@ -457,15 +490,22 @@ footer {
     max-width: 100%;
   }
 
+  /* Reduce spacing in form card content for mobile */
+  main p {
+    padding: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
   /* Card adjustments for mobile - MATCHING WIDTHS */
   .form-card,
   #timerContainer,
   #meditationContainer {
-    width: 100%;
-    max-width: 320px;
-    padding: 1.5rem;
-    min-width: auto;
+    width: 90% !important; /* Use percentage to ensure it fits */
+    max-width: 300px !important; /* Reduced to ensure it fits */
+    min-width: auto !important;
+    padding: 1rem !important;
     box-sizing: border-box;
+    margin: 0 auto; /* Center the containers */
   }
 
   .form-card {
@@ -475,8 +515,12 @@ footer {
   /* Timer container mobile adjustments - AUTO HEIGHT for compact layout */
   #timerContainer,
   #meditationContainer {
-    height: auto;
-    min-height: 300px;
+    height: auto !important;
+    min-height: 300px !important;
+  }
+
+  .form-card {
+    height: auto !important;
   }
 
   #clockFace {
@@ -529,18 +573,16 @@ footer {
     padding: 0.25rem;
   }
 
-  #total-length {
-    font-size: 18px;
-  }
-
   /* Ensure both cards match exactly on small screens */
   .form-card,
-  #timerContainer {
-    max-width: 320px;
-  }
-
-  #timerContainer {
-    padding: 0.75rem;
+  #timerContainer,
+  #meditationContainer {
+    width: 85% !important; /* Even smaller percentage for very small screens */
+    max-width: 280px !important; /* Even smaller for very small screens */
+    min-width: auto !important;
+    margin: 0 auto; /* Center the containers */
+    padding: 0.75rem !important; /* Smaller padding for small screens */
+    box-sizing: border-box; /* Include padding in width calculation */
   }
 
   #clockFace {
@@ -793,18 +835,18 @@ footer {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
+/* Tab system - hide inactive tabs */
 .tab-content {
-  display: none;
+  display: none !important;
 }
 
-.tab-content.active {
-  display: flex;
+/* Show active tab */
+.main-flex .tab-content.active {
+  display: flex !important;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
   gap: 1.5rem;
-  flex: 1;
-  padding: 0;
   width: 100%;
 }
 
@@ -821,11 +863,14 @@ footer {
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
     0 1px 0 rgba(255, 255, 255, 0.2) inset;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */ /* Commenting out the border */
   transition: all 0.3s ease;
   width: 500px;
   height: 480px;
   justify-content: space-between;
+  flex-shrink: 0;
+  min-width: 500px;
+  min-height: 480px;
 }
 
 #meditationContainer:hover {
@@ -849,7 +894,8 @@ footer {
   font-family: "Montserrat", sans-serif;
 }
 
-#meditation-status {
+#meditation-status,
+#timer-status {
   font-size: 1.1rem;
   color: #666;
   text-align: center;
@@ -879,6 +925,7 @@ footer {
 #startMeditation {
   background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
   color: white;
+  border: none;
   box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
 }
 
@@ -951,13 +998,22 @@ footer {
     display: block;
     margin: 0 auto 0.2em auto;
   }
+
+  /* Button adjustments for meditation timer */
+  #meditation-btns {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  #meditation-btns button {
+    width: 100%;
+    padding: 1em;
+    font-size: 1.1em;
+  }
 }
 
 @media (max-width: 480px) {
-  #meditationContainer {
-    padding: 1rem;
-  }
-
   #meditationDisplay {
     font-size: 1.2em;
   }
@@ -969,5 +1025,290 @@ footer {
     max-height: 130px;
     display: block;
     margin: 0 auto 0.1em auto;
+  }
+
+  /* Button adjustments for meditation timer */
+  #meditation-btns button {
+    width: 100%;
+    padding: 1em;
+    font-size: 1.1em;
+  }
+}
+
+/* =============================================
+   MODAL OVERLAY STYLES
+   ============================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  max-width: calc(
+    500px + 300px + 1.5rem
+  ); /* form-card width + timerContainer width + gap */
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-header h3 {
+  color: #333;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-body .info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.modal-body .info-item {
+  background: rgba(139, 92, 246, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.modal-body .info-item h4 {
+  color: #8b5cf6;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.modal-body .info-item p {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.modal-body .info-usage {
+  background: rgba(67, 56, 202, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(67, 56, 202, 0.2);
+}
+
+.modal-body .info-usage h4 {
+  color: #4338ca;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.modal-body .info-usage ol {
+  color: #555;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.modal-body .info-usage li {
+  margin-bottom: 0.5rem;
+}
+
+.modal-body .info-usage li:last-child {
+  margin-bottom: 0;
+}
+
+/* =============================================
+   BEGINNER PRACTICE MODAL STYLES
+   ============================================= */
+.beginner-modal {
+  max-width: 600px;
+}
+
+.practice-intro {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.practice-intro p {
+  color: #065f46;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.pose-sequence {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pose-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.pose-number {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.pose-content h4 {
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.pose-content p {
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.practice-footer {
+  background: rgba(67, 56, 202, 0.1);
+  border: 1px solid rgba(67, 56, 202, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.practice-footer p {
+  color: #4338ca;
+  font-size: 14px;
+  margin: 0 0 1rem 0;
+}
+
+.start-beginner-btn {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.start-beginner-btn:hover {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* Mobile responsiveness for modal */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95%;
+    margin: 1rem;
+  }
+
+  .modal-body .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .info-trigger {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .question-mark {
+    font-size: 16px;
+  }
+
+  .beginner-practice-btn {
+    font-size: 0.9em;
+    padding: 0.35em;
+  }
+
+  .beginner-modal {
+    max-width: 95%;
+  }
+
+  .pose-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .pose-number {
+    margin-bottom: 0.5rem;
   }
 }

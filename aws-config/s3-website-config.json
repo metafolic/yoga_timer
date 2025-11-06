@@ -1,0 +1,20 @@
+{
+  "IndexDocument": {
+    "Suffix": "index.html"
+  },
+  "ErrorDocument": {
+    "Key": "404.html"
+  },
+  "RoutingRules": [
+    {
+      "Condition": {
+        "KeyPrefixEquals": "www/"
+      },
+      "Redirect": {
+        "HostName": "yogaclock.com",
+        "ReplaceKeyPrefixWith": "",
+        "HttpRedirectCode": "301"
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "CallerReference": "yogaclock-distribution-2024",
+  "Comment": "YogaClock.com Static Website Distribution",
+  "DefaultCacheBehavior": {
+    "TargetOriginId": "yogaclock-s3-origin",
+    "ViewerProtocolPolicy": "redirect-to-https",
+    "AllowedMethods": {
+      "Quantity": 2,
+      "Items": ["GET", "HEAD"],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": ["GET", "HEAD"]
+      }
+    },
+    "ForwardedValues": {
+      "QueryString": false,
+      "Cookies": {
+        "Forward": "none"
+      }
+    },
+    "TrustedSigners": {
+      "Enabled": false,
+      "Quantity": 0
+    },
+    "MinTTL": 0,
+    "DefaultTTL": 0,
+    "MaxTTL": 31536000,
+    "Compress": true
+  },
+  "Origins": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "Id": "yogaclock-s3-origin",
+        "DomainName": "yogaclock-com-static.s3-website-us-east-1.amazonaws.com",
+        "CustomOriginConfig": {
+          "HTTPPort": 80,
+          "HTTPSPort": 443,
+          "OriginProtocolPolicy": "http-only"
+        }
+      }
+    ]
+  },
+  "CacheBehaviors": {
+    "Quantity": 2,
+    "Items": [
+      {
+        "PathPattern": "*.css",
+        "TargetOriginId": "yogaclock-s3-origin",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "ForwardedValues": {
+          "QueryString": false,
+          "Cookies": {
+            "Forward": "none"
+          }
+        },
+        "TrustedSigners": {
+          "Enabled": false,
+          "Quantity": 0
+        },
+        "MinTTL": 31536000,
+        "DefaultTTL": 31536000,
+        "MaxTTL": 31536000,
+        "Compress": true
+      },
+      {
+        "PathPattern": "*.js",
+        "TargetOriginId": "yogaclock-s3-origin",
+        "ViewerProtocolPolicy": "redirect-to-https",
+        "ForwardedValues": {
+          "QueryString": false,
+          "Cookies": {
+            "Forward": "none"
+          }
+        },
+        "TrustedSigners": {
+          "Enabled": false,
+          "Quantity": 0
+        },
+        "MinTTL": 31536000,
+        "DefaultTTL": 31536000,
+        "MaxTTL": 31536000,
+        "Compress": true
+      }
+    ]
+  },
+  "CustomErrorResponses": {
+    "Quantity": 1,
+    "Items": [
+      {
+        "ErrorCode": 404,
+        "ResponsePagePath": "/404.html",
+        "ResponseCode": "404",
+        "ErrorCachingMinTTL": 300
+      }
+    ]
+  },
+  "Enabled": true,
+  "Aliases": {
+    "Quantity": 2,
+    "Items": ["yogaclock.com", "www.yogaclock.com"]
+  },
+  "DefaultRootObject": "index.html",
+  "PriceClass": "PriceClass_100",
+  "ViewerCertificate": {
+    "CertificateSource": "acm",
+    "MinimumProtocolVersion": "TLSv1.2_2021"
+  }
+}

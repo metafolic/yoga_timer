@@ -1,0 +1,72 @@
+ <!-- Beginner Practice Modal -->
+      <div id="beginnerModal" class="modal-overlay" onclick="closeBeginnerModal()">
+        <div class="modal-content beginner-modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Beginner Yin Yoga Sequence</h3>
+            <button class="close-btn" onclick="closeBeginnerModal()">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="practice-intro">
+              <p><strong>Perfect for beginners!</strong> This gentle 15-minute sequence uses 6 calming poses, each held for 2 minutes with 30 seconds to transition.</p>
+            </div>
+            
+            <div class="pose-sequence">
+              <div class="pose-item">
+                <div class="pose-number">1</div>
+                <div class="pose-content">
+                  <h4>Child's Pose</h4>
+                  <p>Start in a position with your knees wide and feet together. Sink your hips toward your heels and fold forward, resting your forehead on the mat.</p>
+                </div>
+              </div>
+              
+              <div class="pose-item">
+                <div class="pose-number">2</div>
+                <div class="pose-content">
+                  <h4>Butterfly</h4>
+                  <p>Sit with the soles of your feet together and let your knees fall to the sides. Gently fold forward over your legs, allowing your spine to round and your head to release.</p>
+                </div>
+              </div>
+              
+              <div class="pose-item">
+                <div class="pose-number">3</div>
+                <div class="pose-content">
+                  <h4>Sphinx</h4>
+                  <p>Lie on your stomach and prop your upper body up on your forearms, with your elbows directly under your shoulders. Let your hips and legs relax into the floor.</p>
+                </div>
+              </div>
+              
+              <div class="pose-item">
+                <div class="pose-number">4</div>
+                <div class="pose-content">
+                  <h4>Reclined Twist (Right)</h4>
+                  <p>Lie on your back, bring your right knee to your chest, and then cross it over your body to the left. Extend your right arm out to the side and look in that direction.</p>
+                </div>
+              </div>
+              
+              <div class="pose-item">
+                <div class="pose-number">5</div>
+                <div class="pose-content">
+                  <h4>Reclined Twist (Left)</h4>
+                  <p>Lie on your back, bring your left knee to your chest, and then cross it over your body to the right. Extend your left arm out to the side and look in that direction.</p>
+                </div>
+              </div>
+              
+              <div class="pose-item">
+                <div class="pose-number">6</div>
+                <div class="pose-content">
+                  <h4>Savasana</h4>
+                  <p>Lie on your back with your legs and arms extended, palms facing up. Allow your body to completely relax.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="practice-footer">
+              <p><strong>Ready to begin?</strong> This will set up your timer with the perfect beginner settings and start your practice.</p>
+              <button class="start-beginner-btn" onclick="startBeginnerPractice()">
+                Start 15-Minute Beginner Practice
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      

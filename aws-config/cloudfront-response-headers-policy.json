@@ -1,0 +1,33 @@
+{
+  "ResponseHeadersPolicyConfig": {
+    "Name": "YogaClock-SecurityHeaders",
+    "Comment": "Security headers for YogaClock.com matching Netlify configuration",
+    "SecurityHeadersConfig": {
+      "StrictTransportSecurity": {
+        "AccessControlMaxAgeSec": 31536000,
+        "IncludeSubdomains": true,
+        "Override": false
+      },
+      "ContentTypeOptions": {
+        "Override": false
+      },
+      "FrameOptions": {
+        "FrameOption": "DENY",
+        "Override": false
+      },
+      "ReferrerPolicy": {
+        "ReferrerPolicy": "strict-origin-when-cross-origin",
+        "Override": false
+      }
+    },
+    "CustomHeadersConfig": {
+      "Items": [
+        {
+          "Header": "X-XSS-Protection",
+          "Value": "1; mode=block",
+          "Override": false
+        }
+      ]
+    }
+  }
+}
