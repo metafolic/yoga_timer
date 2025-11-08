@@ -171,7 +171,7 @@
               transform="rotate(-90 100 100)"
             />
           </svg>
-          <div id="timerDisplay">00:00</div>
+          <div id="timerDisplay" class="timerDisplay">00:00</div>
           <div id="timer-status">Ready to begin</div>
           <div id="timer-btns">
             <button id="start-yin" onclick="startYinPractice()">
@@ -237,11 +237,10 @@
                 transform="rotate(-90 100 100)"
               />
             </svg>
-            <div id="meditationDisplay">10:00</div>
+            <div id="meditationDisplay" class="timerDisplay">10:00</div>
             <div id="meditation-status">Ready to begin</div>
             <div id="meditation-btns">
-              <button id="startMeditation" onclick="startMeditationTimer()">Start Meditation
-              </button>
+              <button id="startMeditation" onclick="startMeditationTimer()">Start Meditation</button>
               <button id="pauseMeditation" onclick="pauseMeditation()">Pause</button>
               <button id="resetMeditation" onclick="resetMeditation()">Reset</button>
             </div>
@@ -252,7 +251,7 @@
       <!-- Contact Section -->
       <section id="contact" class="contact-section">
         <div class="contact-container">
-          <h2>Get In Touch</h2>
+          <h2 id="contactHeader">Get In Touch</h2>
           <p>Have feedback, suggestions, or questions about the Yin Yoga Timer? We'd love to hear from you!</p>
           
           <div class="contact-methods">
