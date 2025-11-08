@@ -498,8 +498,7 @@ function finishMeditation() {
   document.getElementById("meditation-status").textContent =
     "Meditation complete! 🙏";
   document.getElementById("meditationDisplay").textContent = "00:00";
-  document.getElementById("startMeditation").textContent =
-    "🧘‍♀️ Start Meditation";
+  document.getElementById("startMeditation").textContent = "Start Meditation";
   document.getElementById("startMeditation").disabled = false;
   document.getElementById("pauseMeditation").disabled = true;
   document.getElementById("resetMeditation").disabled = true;
@@ -538,8 +537,7 @@ function resetMeditation() {
   // Update UI
   updateMeditationDisplay();
   document.getElementById("meditation-status").textContent = "Ready to begin";
-  document.getElementById("startMeditation").textContent =
-    "🧘‍♀️ Start Meditation";
+  document.getElementById("startMeditation").textContent = "Start Meditation";
   document.getElementById("startMeditation").disabled = false;
   document.getElementById("pauseMeditation").textContent = "Pause";
   document.getElementById("pauseMeditation").disabled = true;

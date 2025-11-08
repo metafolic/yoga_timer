@@ -415,6 +415,7 @@ footer {
   max-width: 600px;
   height: 480px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .form-card:hover {
@@ -896,25 +897,41 @@ footer {
   }
 
   .main-flex {
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 0 3rem;
   }
 
   .form-card,
   #timerContainer,
   #meditationContainer {
-    width: 400px;
+    width: 90%;
+    max-width: 430px;
     min-height: 380px;
+    flex-shrink: 0;
   }
 
   .contact-section {
     margin: 2rem auto 1rem auto;
     width: 90%;
-    max-width: 824px; /* 400px + 400px + 24px gap to match form/timer layout */
+    max-width: 924px; /* 450px + 450px + 24px gap to match form/timer layout */
   }
 
   .contact-container {
-    max-width: 824px;
+    max-width: 924px;
+  }
+
+  /* Tab navigation for medium tablets */
+  .tab-btn {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    min-width: 220px;
+  }
+
+  /* Input fields for wider form cards */
+  main p input[type="number"],
+  main p input[type="text"] {
+    max-width: 400px;
   }
 }
 
@@ -969,8 +986,8 @@ footer {
   .form-card,
   #timerContainer,
   #meditationContainer {
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 750px;
     min-width: auto;
     padding: 1rem;
     box-sizing: border-box;
@@ -1028,8 +1045,8 @@ footer {
   /* Contact section mobile styles */
   .contact-section {
     margin: 1rem auto 0.5rem auto;
-    width: 90%;
-    max-width: 500px;
+    width: 95%;
+    max-width: 750px;
   }
 
   .contact-container {
@@ -1054,16 +1071,21 @@ footer {
     padding: 1.5rem;
   }
 
-  /* Tab and meditation mobile styles */
+  /* Tab and meditation styles for larger screens */
   .tab-nav {
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
+    margin: 1rem 0 2rem 0;
+    padding: 0 1rem;
   }
 
   .tab-btn {
-    width: 100%;
-    max-width: 280px;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 28px;
+    min-width: 200px;
   }
 
   .main-flex .tab-content.active {
@@ -1098,13 +1120,58 @@ footer {
 }
 /* Large phones (576px down to 481px) */
 @media (min-width: 481px) and (max-width: 576px) {
+  header {
+    padding: 1.5rem;
+  }
   header h1 {
     font-size: 36px;
+    text-align: center;
   }
 
   .tagline {
     font-size: 16px;
-    margin-bottom: 0.75rem;
+  }
+
+  /* Layout changes for large phones - FORCE VERTICAL STACKING */
+  body {
+    overflow-x: hidden;
+  }
+
+  .main-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .main-flex .tab-content.active {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* Tab navigation for large phones */
+  .tab-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 2rem 0;
+    padding: 0 1rem;
+  }
+
+  .tab-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 22px;
+  }
+
+  /* Input adjustments */
+  main p input[type="number"],
+  main p input[type="text"] {
+    max-width: 100%;
   }
 
   main p {
@@ -1115,11 +1182,13 @@ footer {
   .form-card,
   #timerContainer,
   #meditationContainer {
-    width: 90%;
-    max-width: 450px;
+    width: 100%;
+    max-width: 550px;
     min-width: auto;
     margin: 0 auto;
     padding: 1rem;
+    height: auto;
+    min-height: 350px;
   }
 
   #clockFace {
@@ -1136,11 +1205,35 @@ footer {
     margin-bottom: 0.15em;
   }
 
+  /* Button adjustments */
+  #timer-btns,
+  #meditation-btns {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  #timer-btns button,
+  #meditation-btns button {
+    width: 100%;
+    padding: 1em;
+    font-size: 1.05em;
+  }
+
+  #meditationClock {
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    max-height: 150px;
+    display: block;
+    margin: 0 auto 0.2em auto;
+  }
+
   /* Contact section - match form/timer containers */
   .contact-section {
     margin: 1rem auto 0.5rem auto;
-    width: 90%;
-    max-width: 450px;
+    width: 95%;
+    max-width: 550px;
   }
 
   .contact-container {
@@ -1153,6 +1246,21 @@ footer {
 
   .contact-form {
     padding: 1.25rem;
+  }
+
+  .contact-methods {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    padding: 1rem;
+  }
+
+  /* Preset buttons */
+  .preset-buttons {
+    justify-content: center;
+    padding: 0;
   }
 
   .timerDisplay {
@@ -1171,13 +1279,59 @@ footer {
 
 /* Small phones (480px down to 321px) */
 @media (min-width: 321px) and (max-width: 480px) {
+  header {
+    padding: 1rem 2rem;
+  }
+
   header h1 {
     font-size: 32px;
+    text-align: center;
   }
 
   .tagline {
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: 0.5rem;
+  }
+  /* Layout changes for small phones - FORCE VERTICAL STACKING */
+  body {
+    overflow-x: hidden;
+  }
+
+  .main-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .main-flex .tab-content.active {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* Tab buttons for very small screens */
+  .tab-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0rem 0 2rem 0;
+    padding: 0 0.5rem;
+  }
+
+  .tab-btn {
+    width: 100%;
+    max-width: 250px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 20px;
+  }
+
+  /* Input adjustments */
+  main p input[type="number"],
+  main p input[type="text"] {
+    max-width: 100%;
   }
 
   main p {
@@ -1188,7 +1342,7 @@ footer {
   .form-card,
   #timerContainer,
   #meditationContainer {
-    width: 90%;
+    width: 95%;
     max-width: 400px;
     min-width: auto;
     margin: 0 auto;
@@ -1217,8 +1371,7 @@ footer {
   }
 
   .contact-container {
-    padding: 1rem;
-    max-width: none;
+    padding: 0.75rem;
   }
 
   #contactHeader {
